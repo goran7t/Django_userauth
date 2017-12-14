@@ -1,0 +1,26 @@
+{% load static %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link href='{% static "login.css" %}' rel="stylesheet">
+
+<div class="wrapper">
+    {% if  auth %}
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"><H1>You are logged In!</H1></div>
+            <div class="col-lg-4"></div>
+        </div>
+
+        <form method='post' action="" class="form-signin">{% csrf_token %}
+            <a href="{% url 'change_password' %}" class="btn btn-lg btn-success btn-block">Change Password</a>
+            <br>
+            <a href="{% url 'logout' %}" class="btn btn-lg btn-danger btn-block">LogOut</a>
+        </form>
+    {% else %}
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6"><H1>This is the public page, Please <a href="{% url 'login' %}">Login</a></H1></div>
+            <div class="col-lg-3"></div>
+        </div>
+
+    {% endif %}
+</div>
