@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from user_auth.forms import SignUpForm
 
 # Create your views here.
 # @login_required(redirect_field_name='login')  // decorator - can be done this way
@@ -14,7 +15,7 @@ def index(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = SiginUpForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             user = User.objects.create_user(is_staff=True, is_active=True, **form.cleaned_data)
             messages.success(request, "Your response has been recorded")
@@ -39,7 +40,7 @@ def login_view(request):
             login(request, user)
             return redirect('index')
         else:
-            messages.error(request, "Please check your user name and password")
+            messages.error(request, "Please check your user name and password!")
     return render(request, 'login.html')
 
 @login_required(redirect_field_name='login')
@@ -55,6 +56,4 @@ def change_password(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('login.html')
-
-
+    return redirect('login')

@@ -3,16 +3,16 @@ from django import forms
 class SignUpForm(forms.Form):
     username = forms.CharField(max_length=100, required=True)
     email = forms.EmailField(required=True)
-    password = forms.CharField(widge=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput())
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widge.attrs={
+        self.fields['username'].widget.attrs={
             'class':'form-control'
         }
-        self.fields['email'].widge.attrs={
+        self.fields['email'].widget.attrs={
             'class':'form-control'
         }
-        self.fields['password'].widge.attrs={
+        self.fields['password'].widget.attrs={
             'class':'form-control'
         }
